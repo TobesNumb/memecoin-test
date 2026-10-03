@@ -43,7 +43,9 @@ export function loadEnv(): Env {
   const feeRaw = (process.env["PRIORITY_FEE_MICRO_LAMPORTS"] ?? "0").trim();
   const priorityFeeMicroLamports = Number(feeRaw);
   if (!Number.isInteger(priorityFeeMicroLamports) || priorityFeeMicroLamports < 0) {
-    throw new Error(`PRIORITY_FEE_MICRO_LAMPORTS moet een geheel getal >= 0 zijn, kreeg "${feeRaw}".`);
+    throw new Error(
+      `PRIORITY_FEE_MICRO_LAMPORTS moet een geheel getal >= 0 zijn, kreeg "${feeRaw}".`,
+    );
   }
 
   return { network, rpcUrl, keypairPath, priorityFeeMicroLamports };

@@ -11,6 +11,8 @@ runScript(async () => {
   kv("Publiek adres", publicKey.toBase58());
   info("");
   warn("Dit bestand bevat de geheime sleutel. Maak een back-up buiten git en deel het nooit.");
-  warn("Stort SOL op dit adres voordat je lanceert (devnet: `solana airdrop` of faucet.solana.com).");
+  warn(
+    "Stort SOL op dit adres voordat je lanceert (devnet: `solana airdrop` of faucet.solana.com).",
+  );
   await Promise.resolve();
 });
