@@ -1,0 +1,36 @@
+# --- Geheimen: NOOIT committen ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.seed
+*.mnemonic
+wallet.json
+wallet*.json
+keypair.json
+keypair*.json
+keys/
+secrets/
+id.json
+
+# --- Node / build ---
+node_modules/
+dist/
+build/
+web/dist/
+web/node_modules/
+*.tsbuildinfo
+.eslintcache
+npm-debug.log*
+
+# --- Lokale output van scripts ---
+.launch/
+*.launch.json
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
