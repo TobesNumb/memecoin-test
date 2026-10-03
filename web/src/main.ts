@@ -22,7 +22,7 @@ function renderHero(config: TokenConfig): HTMLElement {
   const hero = el("section", "hero");
 
   const logo = el("img", "hero__logo");
-  logo.src = `/${config.logoPath.split("/").pop() ?? "logo.png"}`;
+  logo.src = `${import.meta.env.BASE_URL}${config.logoPath.split("/").pop() ?? "logo.png"}`;
   logo.alt = `Logo van ${config.name}`;
   logo.width = 128;
   logo.height = 128;
