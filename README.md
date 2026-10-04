@@ -6,7 +6,9 @@ een `launch`-script dat **standaard als dry-run** draait, en een placeholder-lan
 De echte naam, het logo, de teksten en de lancering zelf komen in fase 2.
 
 Hoe de pump.fun-integratie in elkaar zit en welke bronnen we gebruiken staat in
-[`docs/pumpfun.md`](docs/pumpfun.md).
+[`docs/pumpfun.md`](docs/pumpfun.md). Het concept van de huidige invulling, **Monday
+($MONDAY)**, met de onderbouwing van de meme-keuze en het dev-buy-advies, staat in
+[`docs/concept-monday.md`](docs/concept-monday.md).
 
 ## Inhoud
 
@@ -84,8 +86,8 @@ versturen. Dry-runs en devnet werken wel.
 
 ### `assets/logo.png`
 
-Vervang het placeholder-logo door het echte logo (vierkant, minimaal 512×512 is gebruikelijk)
-of pas `logoPath` aan.
+Het logo van $MONDAY: een chagrijnig scheurkalenderblaadje, 880×880 PNG. Wil je een andere
+variant of een ander logo, vervang dan dit bestand of pas `logoPath` aan.
 
 ## 4. Wallet aanmaken en vullen
 
@@ -202,10 +204,11 @@ npm run web:build     # statische build in web/dist
 npm run web:preview   # bekijk de build lokaal
 ```
 
-De pagina leest naam, ticker, beschrijving, links en het contractadres rechtstreeks uit
-`token.config.ts` en serveert `assets/` als publieke map (`/logo.png`). Zolang
-`contractAddress` leeg is, staat er "Nog niet gelanceerd". De styling is bewust neutraal; het
-design komt in fase 2. `web/dist` kun je op elke statische host zetten (Netlify, Vercel,
+De pagina leest naam, ticker, beschrijving, links, dev buy en het contractadres rechtstreeks
+uit `token.config.ts`; de overige teksten (Engels) staan in `web/src/content.ts`. `assets/`
+wordt als publieke map geserveerd (`/logo.png`). Zolang `contractAddress` leeg is, staat er
+"Launching soon". De pagina bevat een live aftelklok naar de volgende maandag, de secties
+"What is $MONDAY?", "How to buy" en "Tokenomics", en een disclaimer. `web/dist` kun je op elke statische host zetten (Netlify, Vercel,
 GitHub Pages, Cloudflare Pages).
 
 ## 10. Veiligheid
@@ -253,12 +256,15 @@ docs/generale-repetitie.md draaiboek voor een end-to-end repetitie op mainnet me
 Handige scripts: `npm run typecheck`, `npm run lint`, `npm run lint:fix`, `npm run format`,
 `npm run format:check`.
 
-## 13. Wat er in fase 2 moet gebeuren
+## 13. Stand van zaken en wat er nog moet gebeuren
 
-- [ ] `token.config.ts`: echte `name`, `symbol`, `description` en `links` invullen.
-- [ ] `assets/logo.png` vervangen door het echte logo (of `logoPath` aanpassen).
-- [ ] Beslissen over `devBuySol` (standaard 0).
-- [ ] Landingspagina: design, teksten en eventueel extra secties in `web/`.
+Fase 2 heeft de invulling gedaan: naam, ticker en beschrijving van **Monday ($MONDAY)**, het
+logo, een dev buy van 0,1 SOL en de landingspagina in huisstijl. Zie
+[`docs/concept-monday.md`](docs/concept-monday.md) voor de onderbouwing.
+
+- [ ] X-account en Telegram aanmaken en de `links` in `token.config.ts` invullen.
+- [ ] Website publiceren en de URL in `links.website` zetten.
 - [ ] Launch-wallet aanmaken, back-uppen en vullen; eigen mainnet-RPC kiezen.
-- [ ] Volledige doorloop op devnet, daarna de dry-run en de lancering op mainnet.
-- [ ] Na de launch: `contractAddress` invullen en de website publiceren.
+- [ ] Generale repetitie doorlopen ([`docs/generale-repetitie.md`](docs/generale-repetitie.md)).
+- [ ] Lanceren op zondagavond of maandagochtend; daarna `contractAddress` invullen en de
+      website opnieuw bouwen en publiceren.
