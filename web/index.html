@@ -3,19 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="$MONDAY: the coin for everyone who hates Mondays. Fair launch on pump.fun."
-    />
+    <meta name="description" content="%DESCRIPTION%" />
     <meta name="theme-color" content="#141a33" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- Social preview (X, Telegram, Discord). Ingevuld uit token.config.ts bij de build. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="%NAME% ($%SYMBOL%)" />
+    <meta property="og:description" content="%DESCRIPTION%" />
+    <meta property="og:url" content="%SITE_URL%" />
+    <meta property="og:image" content="%LOGO_URL%" />
+    <meta property="og:image:width" content="880" />
+    <meta property="og:image:height" content="880" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="%NAME% ($%SYMBOL%)" />
+    <meta name="twitter:description" content="%DESCRIPTION%" />
+    <meta name="twitter:image" content="%LOGO_URL%" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap"
     />
-    <title>MONDAY</title>
+    <title>%NAME% ($%SYMBOL%)</title>
   </head>
   <body>
     <main id="app" class="page">

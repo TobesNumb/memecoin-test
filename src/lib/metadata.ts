@@ -278,6 +278,43 @@ export function loadUploadResult(): UploadResult | null {
   };
 }
 
+export interface LinkCheckResult {
+  label: string;
+  url: string;
+  ok: boolean;
+  status: number | null;
+  error: string | null;
+}
+
+/**
+ * Controleert of elke ingevulde link echt antwoordt. De metadata op pump.fun is
+ * onveranderbaar, dus een dode link blijft voor altijd staan.
+ */
+export async function checkLinks(config: TokenConfig): Promise<LinkCheckResult[]> {
+  const entries: [string, string][] = [
+    ["x", config.links.x],
+    ["telegram", config.links.telegram],
+    ["website", config.links.website],
+  ];
+  const results: LinkCheckResult[] = [];
+  for (const [label, url] of entries) {
+    if (url.length === 0) continue;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        redirect: "follow",
+        signal: AbortSignal.timeout(10_000),
+        headers: { "User-Agent": "Mozilla/5.0 (compatible; memecoin-launch link check)" },
+      });
+      results.push({ label, url, ok: response.status < 400, status: response.status, error: null });
+    } catch (error: unknown) {
+      const reason = error instanceof Error ? error.message : String(error);
+      results.push({ label, url, ok: false, status: null, error: reason.split("\n")[0] ?? reason });
+    }
+  }
+  return results;
+}
+
 export type MetadataUriSource = "flag" | "config" | "upload" | "none";
 
 export interface ResolvedMetadataUri {

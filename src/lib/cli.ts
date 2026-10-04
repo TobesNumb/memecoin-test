@@ -7,6 +7,7 @@ export interface CliFlags {
   confirm: boolean;
   dryRun: boolean;
   uri: string | undefined;
+  allowDeadLinks: boolean;
   help: boolean;
 }
 
@@ -19,6 +20,7 @@ export function parseFlags(argv: string[] = process.argv.slice(2)): CliFlags {
       confirm: { type: "boolean", default: false },
       "dry-run": { type: "boolean", default: false },
       uri: { type: "string" },
+      "allow-dead-links": { type: "boolean", default: false },
       help: { type: "boolean", short: "h", default: false },
     },
     strict: true,
@@ -29,6 +31,7 @@ export function parseFlags(argv: string[] = process.argv.slice(2)): CliFlags {
     confirm: values.confirm,
     dryRun: values["dry-run"],
     uri: values.uri,
+    allowDeadLinks: values["allow-dead-links"],
     help: values.help,
   };
 }

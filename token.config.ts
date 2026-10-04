@@ -53,9 +53,12 @@ export const tokenConfig: TokenConfig = {
   description:
     "The coin for everyone who hates Mondays. Grr. Fair launch on pump.fun, no presale, no team tokens. Every Monday is a catalyst. #GrrMondays",
   links: {
+    // Invullen zodra het account bestaat; metadata:upload controleert of de link leeft.
     x: "",
+    // Invullen zodra de groep bestaat, bijv. "https://t.me/mondaycoinsol".
     telegram: "",
-    website: "",
+    // GitHub Pages van deze repo; wordt live zodra Pages aanstaat en main gedeployd is.
+    website: "https://tobesnumb.github.io/memecoin-test/",
   },
   logoPath: "assets/logo.png",
   devBuySol: 0.1,
