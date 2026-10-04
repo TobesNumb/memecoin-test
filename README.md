@@ -122,6 +122,10 @@ npm run metadata:upload -- --dry-run   # toont wat er geüpload zou worden
 npm run metadata:upload                # uploadt echt en bewaart de URI
 ```
 
+Vóór de upload controleert het script of elke ingevulde link echt antwoordt; bij een dode link
+stopt het, want de metadata is daarna onveranderbaar. Omzeilen kan bewust met
+`--allow-dead-links`.
+
 Het resultaat komt in `.launch/metadata.json` (staat in `.gitignore`). `launch` gebruikt dat
 bestand automatisch en waarschuwt als de naam of ticker inmiddels is veranderd.
 
@@ -208,7 +212,17 @@ De pagina leest naam, ticker, beschrijving, links, dev buy en het contractadres 
 uit `token.config.ts`; de overige teksten (Engels) staan in `web/src/content.ts`. `assets/`
 wordt als publieke map geserveerd (`/logo.png`). Zolang `contractAddress` leeg is, staat er
 "Launching soon". De pagina bevat een live aftelklok naar de volgende maandag, de secties
-"What is $MONDAY?", "How to buy" en "Tokenomics", en een disclaimer. `web/dist` kun je op elke statische host zetten (Netlify, Vercel,
+"What is $MONDAY?", "How to buy" en "Tokenomics", en een disclaimer. De titel, de beschrijving
+en de social-preview-tags (Open Graph, X-card) worden bij de build uit `token.config.ts`
+ingevuld.
+
+### Publiceren via GitHub Pages
+
+De workflow `.github/workflows/deploy-web.yml` bouwt `web/` bij elke push naar `main` en
+publiceert `web/dist` op `https://tobesnumb.github.io/memecoin-test/`. Eenmalig aanzetten:
+Settings, Pages, Build and deployment, Source: "GitHub Actions". De workflow
+`.github/workflows/ci.yml` draait typecheck, lint, format-check en de web-build op elke pull
+request en push naar `main`. `web/dist` kun je op elke statische host zetten (Netlify, Vercel,
 GitHub Pages, Cloudflare Pages).
 
 ## 10. Veiligheid
@@ -250,6 +264,9 @@ src/scripts/*.ts           wallet-create, wallet-balance, metadata-upload, launc
 web/                       Vite-landingspagina (eigen package.json, npm-workspace)
 docs/pumpfun.md            onderzoek en bronnen van de pump.fun-integratie
 docs/generale-repetitie.md draaiboek voor een end-to-end repetitie op mainnet met een wegwerpwallet
+docs/concept-monday.md     onderbouwing van het concept Monday ($MONDAY)
+docs/launch-kit.md         accounts, teksten en draaiboek voor de launchdag
+.github/workflows/         CI (typecheck, lint, format, build) en deploy naar GitHub Pages
 .env.example               voorbeeld van de omgevingsvariabelen
 ```
 
@@ -260,7 +277,9 @@ Handige scripts: `npm run typecheck`, `npm run lint`, `npm run lint:fix`, `npm r
 
 Fase 2 heeft de invulling gedaan: naam, ticker en beschrijving van **Monday ($MONDAY)**, het
 logo, een dev buy van 0,1 SOL en de landingspagina in huisstijl. Zie
-[`docs/concept-monday.md`](docs/concept-monday.md) voor de onderbouwing.
+[`docs/concept-monday.md`](docs/concept-monday.md) voor de onderbouwing en
+[`docs/launch-kit.md`](docs/launch-kit.md) voor accounts, teksten en het draaiboek van de
+launchdag.
 
 - [ ] X-account en Telegram aanmaken en de `links` in `token.config.ts` invullen.
 - [ ] Website publiceren en de URL in `links.website` zetten.
