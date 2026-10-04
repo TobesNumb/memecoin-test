@@ -1,0 +1,47 @@
+{
+  "name": "memecoin-launch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fase 1: sjabloon om een memecoin op pump.fun (Solana) te lanceren, met dry-run als standaard.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "wallet:create": "tsx src/scripts/wallet-create.ts",
+    "wallet:balance": "tsx src/scripts/wallet-balance.ts",
+    "metadata:upload": "tsx src/scripts/metadata-upload.ts",
+    "launch": "tsx src/scripts/launch.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p web/tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "web:dev": "npm run dev --workspace web",
+    "web:build": "npm run build --workspace web",
+    "web:preview": "npm run preview --workspace web"
+  },
+  "dependencies": {
+    "@pump-fun/pump-sdk": "2.0.0",
+    "@solana/spl-token": "^0.4.15",
+    "@solana/web3.js": "^1.99.0",
+    "bn.js": "^5.2.5",
+    "bs58": "^6.0.0",
+    "dotenv": "^18.0.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bn.js": "^5.2.0",
+    "@types/node": "^22.20.5",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.0"
+  }
+}

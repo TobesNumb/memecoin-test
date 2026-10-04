@@ -7,13 +7,13 @@ naar een bron in de lijst onderaan.
 
 ## Samenvatting
 
-| Onderdeel                         | Keuze                                                                                  | Status           |
-| --------------------------------- | -------------------------------------------------------------------------------------- | ---------------- |
-| On-chain token aanmaken           | Officiële SDK `@pump-fun/pump-sdk` v2.0.0, instructie `create_v2`                      | Geverifieerd     |
-| Program-ID Pump (bonding curve)   | `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` (mainnet **en** devnet)                  | Geverifieerd     |
-| Metadata + logo naar IPFS         | `POST https://pump.fun/api/ipfs` (gebruikt door de pump.fun-webapp, niet gedocumenteerd) | De-facto standaard |
-| Alternatief voor IPFS             | Eigen metadata-URI (zelfde JSON-formaat) via `--uri` / config                          | Gepland          |
-| Devnet                            | Programma staat op devnet; de pump.fun-website toont devnet-tokens niet                | Geverifieerd (docs) |
+| Onderdeel                       | Keuze                                                                                    | Status              |
+| ------------------------------- | ---------------------------------------------------------------------------------------- | ------------------- |
+| On-chain token aanmaken         | Officiële SDK `@pump-fun/pump-sdk` v2.0.0, instructie `create_v2`                        | Geverifieerd        |
+| Program-ID Pump (bonding curve) | `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` (mainnet **en** devnet)                    | Geverifieerd        |
+| Metadata + logo naar IPFS       | `POST https://pump.fun/api/ipfs` (gebruikt door de pump.fun-webapp, niet gedocumenteerd) | De-facto standaard  |
+| Alternatief voor IPFS           | Eigen metadata-URI (zelfde JSON-formaat) via `--uri` / config                            | Gepland             |
+| Devnet                          | Programma staat op devnet; de pump.fun-website toont devnet-tokens niet                  | Geverifieerd (docs) |
 
 ## 1. De officiële SDK: `@pump-fun/pump-sdk`
 
@@ -29,11 +29,11 @@ naar een bron in de lijst onderaan.
 
 ### Program-ID's (uit de IDL's in de SDK, bevestigd door pump-public-docs)
 
-| Programma                | Program-ID                                      |
-| ------------------------ | ----------------------------------------------- |
-| Pump (bonding curve)     | `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`   |
-| PumpSwap AMM             | `pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA`   |
-| Pump Fees                | `pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ`   |
+| Programma                                     | Program-ID                                    |
+| --------------------------------------------- | --------------------------------------------- |
+| Pump (bonding curve)                          | `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` |
+| PumpSwap AMM                                  | `pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA` |
+| Pump Fees                                     | `pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ` |
 | Mayhem (door `create_v2` vereist als account) | `MAyhSmzXzV1pTf7LsNkrNwkWKTo4ougAJ1PPg47MD4e` |
 
 Wij hardcoden deze adressen **niet** in onze eigen code: we importeren
@@ -53,9 +53,9 @@ Wij hardcoden deze adressen **niet** in onze eigen code: we importeren
   holder-reward, geen eigen creator fee, quote in SOL (standaard).
 - "Dev buy" (eerste aankoop in dezelfde transactie): de SDK biedt
   `createV2AndBuyInstructions({ global, mint, name, symbol, uri, creator, user,
-  solAmount, amount, mayhemMode })`. Het `amount` berekenen we met
+solAmount, amount, mayhemMode })`. Het `amount` berekenen we met
   `getBuyTokenAmountFromSolAmount({ global, feeConfig, mintSupply: null,
-  bondingCurve: null, amount, quoteMint: NATIVE_MINT })`; `global` en
+bondingCurve: null, amount, quoteMint: NATIVE_MINT })`; `global` en
   `feeConfig` komen via `OnlinePumpSdk.fetchGlobal()` / `fetchFeeConfig()`.
 - Een losse `create_v2` kan **volledig offline** gebouwd worden
   (`PUMP_SDK.createV2Instruction(...)`, geen RPC nodig). Dat hebben we
@@ -107,7 +107,7 @@ zonder aankondiging veranderen. Daarom:
 - Als het endpoint ooit wegvalt, kun je de JSON in hetzelfde formaat zelf
   pinnen (bijv. Pinata of NFT.Storage) en de URI via `token.config.ts`
   (`metadataUri`) of `--uri` meegeven aan `launch`. De JSON-structuur staat in
-  `src/metadata.ts` zodat je die 1-op-1 kunt hergebruiken.
+  `src/lib/metadata.ts` zodat je die 1-op-1 kunt hergebruiken.
 
 ## 3. Devnet
 
