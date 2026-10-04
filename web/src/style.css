@@ -1,132 +1,310 @@
-/* Placeholder-styling: bewust neutraal. Het echte design komt in fase 2. */
+/* $MONDAY: navy paper-and-ink look, yellow calendar page, red "grr". */
 :root {
-  color-scheme: light dark;
-  --bg: #f6f6f9;
-  --fg: #16161f;
-  --muted: #5e5e70;
-  --card: #ffffff;
-  --border: #dcdce4;
-  --accent: #d99a00;
-  --accent-fg: #16161f;
-  font-family:
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-  line-height: 1.5;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #15151f;
-    --fg: #f1f1f5;
-    --muted: #a3a3b5;
-    --card: #1e1e2b;
-    --border: #2f2f40;
-    --accent: #ffc400;
-  }
+  color-scheme: dark;
+  --bg: #141a33;
+  --bg-deep: #0d1226;
+  --card: #1c2340;
+  --border: #2c355c;
+  --fg: #f4f4f8;
+  --muted: #9aa0b8;
+  --yellow: #ffc400;
+  --yellow-ink: #141a33;
+  --grr: #ff5a36;
+  --display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background: var(--bg);
+  font-family: var(--body);
+  line-height: 1.55;
   color: var(--fg);
+  background: radial-gradient(circle at 50% -10%, #263066 0, transparent 55%), var(--bg);
 }
 
 .page {
-  max-width: 640px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 48px 16px 64px;
+  padding: 40px 16px 48px;
 }
 
+/* --- Hero ------------------------------------------------------------ */
 .hero {
   text-align: center;
+  padding-top: 24px;
 }
 
 .hero__logo {
-  width: 128px;
-  height: 128px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--border);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  animation: wobble 6s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__logo {
+    animation: none;
+  }
 }
 
 .hero__name {
-  margin: 16px 0 4px;
-  font-size: 2rem;
+  margin: 20px 0 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 14vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--yellow);
 }
 
 .hero__ticker {
-  margin: 0;
+  margin: 8px 0 0;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   color: var(--muted);
-  font-weight: 600;
-  letter-spacing: 0.08em;
 }
 
-.hero__description {
+.hero__tagline {
   margin: 20px auto 0;
-  max-width: 48ch;
+  max-width: 34ch;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-.card {
-  margin-top: 32px;
-  padding: 20px;
+.hero__grr {
+  margin: 4px 0 0;
+  font-family: var(--display);
+  font-size: 2rem;
+  color: var(--grr);
+  letter-spacing: 0.06em;
+}
+
+/* --- Contract block --------------------------------------------------- */
+.contract {
+  margin: 28px auto 0;
+  max-width: 640px;
+  padding: 16px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
-.card h2 {
-  margin: 0 0 12px;
-  font-size: 1rem;
+.contract__label {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
-.contract {
+.contract__row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  justify-content: center;
 }
 
 .contract__address {
-  flex: 1 1 auto;
+  flex: 1 1 320px;
   min-width: 0;
-  padding: 8px 10px;
+  padding: 10px 12px;
+  background: var(--bg-deep);
   border: 1px solid var(--border);
   border-radius: 8px;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.85rem;
   word-break: break-all;
   user-select: all;
+  text-align: left;
 }
 
 .contract__pending {
+  margin: 0;
   color: var(--muted);
-  font-style: italic;
 }
 
+/* --- Buttons ---------------------------------------------------------- */
 .button {
-  padding: 8px 14px;
+  display: inline-block;
+  padding: 12px 20px;
   border: none;
-  border-radius: 8px;
-  background: var(--accent);
-  color: var(--accent-fg);
-  font-weight: 600;
+  border-radius: 999px;
+  font-family: var(--body);
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
   cursor: pointer;
+  transition: transform 120ms ease;
 }
 
 .button:hover {
-  filter: brightness(1.05);
+  transform: translateY(-1px);
 }
 
+.button--primary {
+  background: var(--grr);
+  color: #fff;
+}
+
+.button--secondary {
+  background: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* --- Countdown -------------------------------------------------------- */
+.countdown {
+  margin-top: 48px;
+  padding: 24px 16px;
+  text-align: center;
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  border-radius: 18px;
+  transform: rotate(-1deg);
+}
+
+.countdown__inner {
+  transform: rotate(1deg);
+}
+
+.countdown__heading {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.countdown__time {
+  margin: 6px 0 0;
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__sub {
+  margin: 8px 0 0;
+  font-weight: 600;
+}
+
+/* --- Sections and cards ----------------------------------------------- */
+.section {
+  margin-top: 56px;
+}
+
+.section__heading {
+  margin: 0 0 18px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.card__step {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  font-family: var(--display);
+  font-size: 1.2rem;
+}
+
+.card__title {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.card__text {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* --- Tokenomics ------------------------------------------------------- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.table tr:last-child th,
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table th {
+  width: 40%;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* --- Links and footer ------------------------------------------------- */
 .links {
   list-style: none;
   margin: 0;
@@ -134,24 +312,26 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-}
-
-.links a {
-  display: inline-block;
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--fg);
-  text-decoration: none;
-}
-
-.links a:hover {
-  border-color: var(--accent);
+  justify-content: center;
 }
 
 .footer {
-  margin-top: 40px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
   text-align: center;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+}
+
+.footer__disclaimer {
+  max-width: 64ch;
+  margin: 0 auto 12px;
+}
+
+.footer__made {
+  margin: 0;
+  font-family: var(--display);
+  letter-spacing: 0.08em;
+  color: var(--grr);
 }
