@@ -203,6 +203,10 @@ runScript(async () => {
   );
   kv("Dev buy", `${config.devBuySol} SOL`);
   kv("Priority fee", `${plan.priorityFeeMicroLamports} micro-lamports/CU`);
+  kv(
+    "Uitgavenlimiet",
+    env.maxSpendSol === null ? "geen (MAX_SPEND_SOL niet gezet)" : `${env.maxSpendSol} SOL`,
+  );
   kv("Instructies", `${plan.instructions.length} (${plan.mode})`);
 
   // --- Simulatie ----------------------------------------------------------
@@ -226,6 +230,14 @@ runScript(async () => {
   // --- Laatste controles en bevestiging ------------------------------------
   if (!simulation?.ok) {
     fail("De simulatie is niet geslaagd; er wordt niets verstuurd.");
+  }
+  if (env.maxSpendSol !== null && simulation.costLamports !== null) {
+    const limitLamports = solToLamports(env.maxSpendSol);
+    if (simulation.costLamports > limitLamports) {
+      fail(
+        `De simulatie kost ${lamportsToSol(simulation.costLamports)}, meer dan de uitgavenlimiet van ${env.maxSpendSol} SOL (MAX_SPEND_SOL). Er wordt niets verstuurd.`,
+      );
+    }
   }
   const balanceSol = await getBalanceSol(connection, payer.publicKey);
   const neededLamports =

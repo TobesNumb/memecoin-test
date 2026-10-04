@@ -8,6 +8,8 @@ export interface Env {
   rpcUrl: string;
   keypairPath: string;
   priorityFeeMicroLamports: number;
+  /** Optionele harde grens: launch weigert te versturen als de simulatie meer kost. */
+  maxSpendSol: number | null;
 }
 
 /** Absolute projectmap (de map met package.json en token.config.ts). */
@@ -48,7 +50,16 @@ export function loadEnv(): Env {
     );
   }
 
-  return { network, rpcUrl, keypairPath, priorityFeeMicroLamports };
+  const maxSpendRaw = (process.env["MAX_SPEND_SOL"] ?? "").trim();
+  let maxSpendSol: number | null = null;
+  if (maxSpendRaw.length > 0) {
+    maxSpendSol = Number(maxSpendRaw);
+    if (!Number.isFinite(maxSpendSol) || maxSpendSol <= 0) {
+      throw new Error(`MAX_SPEND_SOL moet een getal > 0 zijn, kreeg "${maxSpendRaw}".`);
+    }
+  }
+
+  return { network, rpcUrl, keypairPath, priorityFeeMicroLamports, maxSpendSol };
 }
 
 /** Explorer-links voor een transactie of adres op het gekozen netwerk. */

@@ -64,6 +64,7 @@ npm run launch          # dry-run met de placeholder-config, verstuurt niets
 | `RPC_URL`                     | RPC-endpoint van dat netwerk.                                                                 |
 | `KEYPAIR_PATH`                | Pad naar het keypair-bestand van de launch-wallet. Standaard `./keys/wallet.json`.            |
 | `PRIORITY_FEE_MICRO_LAMPORTS` | Optioneel. Priority fee per compute unit; helpt op mainnet om sneller te landen. Standaard 0. |
+| `MAX_SPEND_SOL`               | Optioneel. Harde uitgavenlimiet: kost de simulatie meer, dan verstuurt `launch` niets.        |
 
 ### `token.config.ts` (de enige plek met tokengegevens)
 
@@ -171,7 +172,9 @@ on-chain configuratie van pump.fun op devnet achterloopt op mainnet. Zie
 
 ## 8. Lanceren op mainnet
 
-Alleen als alles op devnet werkte en `token.config.ts` definitief is.
+Alleen als alles op devnet werkte en `token.config.ts` definitief is. Wil je eerst één keer
+de hele flow echt doorlopen met een wegwerpwallet en een klein budget, volg dan het draaiboek
+in [`docs/generale-repetitie.md`](docs/generale-repetitie.md).
 
 1. Zet in `.env`: `NETWORK=mainnet` en een mainnet-`RPC_URL` (liefst een eigen provider).
 2. Zorg dat er genoeg SOL op de launch-wallet staat: de kosten uit de dry-run plus de dev buy
@@ -214,7 +217,7 @@ GitHub Pages, Cloudflare Pages).
   `--confirm` **en** een letterlijk `ja` in de terminal. `--dry-run` wint altijd van `--confirm`.
 - Het netwerk in de flag moet overeenkomen met `NETWORK` in `.env`, anders stopt het script.
 - Op mainnet wordt geweigerd zolang de config `PLACEHOLDER`-tekst bevat, de simulatie niet
-  slaagt of het saldo te laag is.
+  slaagt, het saldo te laag is of de kosten boven `MAX_SPEND_SOL` uitkomen.
 - Gebruik voor de launch een aparte wallet met alleen het benodigde bedrag, niet je hoofdwallet.
 - Buiten scope en bewust niet aanwezig: sniper-, bundle- en auto-tradefuncties.
 
@@ -243,6 +246,7 @@ src/lib/launch.ts          create_v2 (+ dev buy) bouwen, simuleren, versturen
 src/scripts/*.ts           wallet-create, wallet-balance, metadata-upload, launch
 web/                       Vite-landingspagina (eigen package.json, npm-workspace)
 docs/pumpfun.md            onderzoek en bronnen van de pump.fun-integratie
+docs/generale-repetitie.md draaiboek voor een end-to-end repetitie op mainnet met een wegwerpwallet
 .env.example               voorbeeld van de omgevingsvariabelen
 ```
 
