@@ -6,8 +6,8 @@
  *   - de landingspagina in `web/` in de browser.
  * Houd het daarom puur data: geen Node-imports, geen geheimen.
  *
- * Fase 2: vervang alle PLACEHOLDER-waarden. Zolang er ergens "PLACEHOLDER" in
- * staat, weigert `launch` om op mainnet te versturen.
+ * Zolang er ergens "PLACEHOLDER" in staat, weigert `launch` om op mainnet te
+ * versturen. Het concept achter deze invulling staat in docs/concept-monday.md.
  */
 
 export interface TokenLinks {
@@ -48,17 +48,17 @@ export interface TokenConfig {
 }
 
 export const tokenConfig: TokenConfig = {
-  name: "PLACEHOLDER Coin",
-  symbol: "PLHDR",
+  name: "Monday",
+  symbol: "MONDAY",
   description:
-    "PLACEHOLDER: korte, pakkende beschrijving van de memecoin. Vervang deze tekst in fase 2.",
+    "The coin for everyone who hates Mondays. Grr. Fair launch on pump.fun, no presale, no team tokens. Every Monday is a catalyst. #GrrMondays",
   links: {
-    x: "https://x.com/PLACEHOLDER",
-    telegram: "https://t.me/PLACEHOLDER",
-    website: "https://PLACEHOLDER.example",
+    x: "",
+    telegram: "",
+    website: "",
   },
   logoPath: "assets/logo.png",
-  devBuySol: 0,
+  devBuySol: 0.1,
   metadataUri: "",
   contractAddress: "",
 };
